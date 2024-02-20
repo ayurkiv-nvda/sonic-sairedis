@@ -34,6 +34,9 @@ fi
 # Create a folder for SAI failure dump files
 mkdir -p /var/log/sai_failure_dump/
 
+# Create a folder for SDK/SAI dumps
+mkdir -p /var/log/mellanox/sniffer
+
 # Use bulk APIs in SAI
 # currently disabled since most vendors don't support that yet
 # CMD_ARGS+=" -l"
@@ -249,6 +252,10 @@ config_syncd_mlnx()
     if [[ -f /tmp/sai_extra.profile ]]; then
         cat /tmp/sai_extra.profile >> /tmp/sai.profile
     fi
+
+    # Enable SDK sniffer
+    export SX_SNIFFER_ENABLE=1
+    export SX_SNIFFER_TARGET=$(echo "/var/log/mellanox/sniffer/sx_sdk_sniffer_$(date +\%Y\%m\%d\%H\%M\%S).pcap")
 }
 
 config_syncd_centec()
