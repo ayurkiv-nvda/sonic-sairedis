@@ -233,6 +233,10 @@ config_syncd_mlnx()
     if [[ -f /tmp/sai_extra.profile ]]; then
         cat /tmp/sai_extra.profile >> /tmp/sai.profile
     fi
+
+    # Enable SDK sniffer
+    export SX_SNIFFER_ENABLE=1
+    export SX_SNIFFER_TARGET=$(echo "/var/log/mellanox/sniffer/sx_sdk_sniffer_$(date +\%Y\%m\%d\%H\%M\%S).log")
 }
 
 config_syncd_centec()
