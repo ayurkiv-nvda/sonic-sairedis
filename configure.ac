@@ -148,6 +148,8 @@ fi
 AM_CONDITIONAL(ASAN_ENABLED, test x$asan_enabled = xtrue)
 AM_CONDITIONAL(PYTHON2, test x$python2 = xtrue)
 
+AM_CONDITIONAL(GCOV_ENABLED, test x$enable_code_coverage = xyes)
+
 AC_PATH_PROGS(SWIG, [swig4.0 swig3.0 swig])
 
 CXXFLAGS_COMMON=""
@@ -174,7 +176,9 @@ CXXFLAGS_COMMON+=" -Winvalid-pch"
 CXXFLAGS_COMMON+=" -Wmissing-field-initializers"
 CXXFLAGS_COMMON+=" -Wmissing-format-attribute"
 CXXFLAGS_COMMON+=" -Wmissing-include-dirs"
+if test "x$enable_code_coverage" != "xyes"; then
 CXXFLAGS_COMMON+=" -Wmissing-noreturn"
+fi
 CXXFLAGS_COMMON+=" -Wno-aggregate-return"
 CXXFLAGS_COMMON+=" -Wno-padded"
 CXXFLAGS_COMMON+=" -Wno-switch-enum"

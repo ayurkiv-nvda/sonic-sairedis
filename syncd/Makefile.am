@@ -67,6 +67,12 @@ if ASAN_ENABLED
 syncd_SOURCES += Asan.cpp
 libSyncd_a_CXXFLAGS += -DASAN_ENABLED
 endif
+
+if GCOV_ENABLED
+syncd_SOURCES += gcovpreload.cpp
+endif
+
+
 syncd_CPPFLAGS = $(CODE_COVERAGE_CPPFLAGS)
 syncd_CXXFLAGS = $(DBGFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS_COMMON) $(CODE_COVERAGE_CXXFLAGS) $(CFLAGS_ASAN)
 syncd_LDADD = libSyncd.a $(top_srcdir)/lib/libSaiRedis.a -L$(top_srcdir)/meta/.libs -lsaimetadata -lsaimeta \
